@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Estilos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for estilo in estilos %}
+            <tr>
+                <td><a href="{{ path('estilo_show', { 'id': estilo.id }) }}">{{ estilo.id }}</a></td>
+                <td>{{ estilo.descripcion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('estilo_show', { 'id': estilo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('estilo_edit', { 'id': estilo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('estilo_new') }}">Create a new estilo</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Estilo
@@ -35,6 +36,11 @@ class Estilo
 
 	public function __construct(){
 		$this->cervezas = new ArrayCollection();
+	}
+
+	public function __toString()
+	{
+		return $this->descripcion;
 	}
 
     /**
@@ -105,4 +111,3 @@ class Estilo
         return $this->cervezas;
     }
 }
-

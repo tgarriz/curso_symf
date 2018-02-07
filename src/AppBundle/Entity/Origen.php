@@ -29,6 +29,11 @@ class Origen
     private $descripcion;
 
 
+	public function __toString()
+	{
+		return $this->descripcion;
+	}
+
     /**
      * Get id
      *

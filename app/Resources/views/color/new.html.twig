@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nuevo Color</h1>
+
+    <div class="panel panel-default">
+		<div class="panel-body">
+
+			{# {{ form_start(form) }} #}
+			 {{ form_start(form, {"attr":{"novalidate":"novalidate"}}) }}
+
+	      <div class="form-group col-xs-6">
+	            <label>{{ form_label(form.descripcion) }}</label>
+	            {{ form_errors(form.descripcion)}}
+	            {{ form_widget(form.descripcion, {'attr' : {'class' : 'form-control'} }) }}
+	        </div>
+
+		</div>
+		<div class="panel-footer">
+			<button type="submit" class="btn  btn-success">Guardar</button>
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Origens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for origen in origens %}
+            <tr>
+                <td><a href="{{ path('origen_show', { 'id': origen.id }) }}">{{ origen.id }}</a></td>
+                <td>{{ origen.descripcion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('origen_show', { 'id': origen.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('origen_edit', { 'id': origen.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('origen_new') }}">Create a new origen</a>
+        </li>
+    </ul>
+{% endblock %}
