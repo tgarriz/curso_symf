@@ -48,7 +48,12 @@ class ColorController extends Controller
             $em->persist($color);
             $em->flush();
 
-            return $this->redirectToRoute('color_show', array('id' => $color->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Color agregado con éxito.'
+           );
+            return $this->redirectToRoute('color_index');
         }
 
         return $this->render('color/new.html.twig', array(
