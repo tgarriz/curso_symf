@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Color
@@ -23,6 +24,8 @@ class Color
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank(message = "Espe campo no puede ser vacio")
      *
      * @ORM\Column(name="descripcion", type="string", length=100, unique=true)
      */
@@ -68,4 +71,3 @@ class Color
         return $this->descripcion;
     }
 }
-

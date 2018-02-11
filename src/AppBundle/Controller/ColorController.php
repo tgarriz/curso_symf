@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Color;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Color controller.
@@ -93,7 +94,13 @@ class ColorController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('color_edit', array('id' => $color->getId()));
+            //return $this->redirectToRoute('color_edit', array('id' => $color->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Color editado con éxito.'
+           );
+            return $this->redirectToRoute('color_index');
         }
 
         return $this->render('color/edit.html.twig', array(
@@ -120,6 +127,11 @@ class ColorController extends Controller
             $em->flush();
         }
 
+        //Crea un mensaje de session Flash que se mostrará en la página.
+       $this->addFlash(
+           'notice',
+           'Color eliminado con éxito.'
+       );
         return $this->redirectToRoute('color_index');
     }
 
