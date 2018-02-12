@@ -1,16 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Origen creation</h1>
+    <h1>Nuevo origen</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <div class="panel panel-default">
+		<div class="panel-body">
 
-    <ul>
-        <li>
-            <a href="{{ path('origen_index') }}">Back to the list</a>
-        </li>
-    </ul>
+			{# {{ form_start(form) }} #}
+			 {{ form_start(form, {"attr":{"novalidate":"novalidate"}}) }}
+
+	      <div class="form-group col-xs-6">
+	            <label>{{ form_label(form.descripcion) }}</label>
+	            {{ form_errors(form.descripcion)}}
+	            {{ form_widget(form.descripcion, {'attr' : {'class' : 'form-control'} }) }}
+	        </div>
+
+		</div>
+		<div class="panel-footer">
+			<button type="submit" class="btn btn-success">Guardar</button>
+      <a class="btn " href="{{ path('origen_index') }}">Cancelar</a>
+			{{ form_end(form) }}
+
+		</div>
+	</div>
 {% endblock %}

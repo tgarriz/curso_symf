@@ -68,4 +68,3 @@ class Origen
         return $this->descripcion;
     }
 }
-

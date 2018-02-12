@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Estilo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Estilo controller.
@@ -68,13 +69,30 @@ class EstiloController extends Controller
      * @Route("/{id}", name="estilo_show")
      * @Method("GET")
      */
-    public function showAction(Estilo $estilo, $titulo = "Estilo")
+    public function showAction(Estilo $estilo)
     {
         $deleteForm = $this->createDeleteForm($estilo);
 
         return $this->render('estilo/show.html.twig', array(
             'estilo' => $estilo,
-            'titulo' => $titulo,
+            'titulo' => "Mostrar Estilo",
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a estilo entity.
+     *
+     * @Route("/{id}", name="estilo_del")
+     * @Method("GET")
+     */
+    public function delAction(Estilo $estilo)
+    {
+        $deleteForm = $this->createDeleteForm($estilo);
+
+        return $this->render('estilo/show.html.twig', array(
+            'estilo' => $estilo,
+            'titulo' => "Borrar Estilo",
             'delete_form' => $deleteForm->createView(),
         ));
     }

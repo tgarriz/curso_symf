@@ -14,10 +14,10 @@
         <tbody>
         {% for estilo in estilos %}
             <tr>
-                <td><a href="{{ path('estilo_show', { 'id': estilo.id }, "Mostrar Estilo") }}">{{ estilo.id }}</a></td>
+                <td><a href="{{ path('estilo_show', { 'id': estilo.id }) }}">{{ estilo.id }}</a></td>
                 <td>{{ estilo.descripcion }}</td>
                 <td><a href="{{ path('estilo_edit', { 'id': estilo.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-edit"></i>edit</a>
-                <a href="{{ path('estilo_delete', { 'id': estilo.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-del"></i>Delete</a></td>
+                <a href="{{ path('estilo_del', { 'id': estilo.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-del"></i>Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>

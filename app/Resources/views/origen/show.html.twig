@@ -1,32 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Origen</h1>
+    <h1>origen</h1>
 
-    <table>
-        <tbody>
+    <table class="table table-bordered table-hover">
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ origen.id }}</td>
-            </tr>
-            <tr>
                 <th>Descripcion</th>
-                <td>{{ origen.descripcion }}</td>
             </tr>
-        </tbody>
-    </table>
+        </thead>
+        <tbody>
+            <tr>
+              <td> {{ origen.id }} </td>
+              <td> {{ origen.descripcion }} </td>
+            </tr>
+          </tbody>
+      </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('origen_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('origen_edit', { 'id': origen.id }) }}">Edit</a>
-        </li>
-        <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button type="submit" value="Delete" class="btn  btn-success">Borrar</button>
+                <a class="btn " href="{{ path('origen_index') }}">Volver</a>
             {{ form_end(delete_form) }}
-        </li>
+
     </ul>
 {% endblock %}

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Origens list</h1>
+    <h1>origens list</h1>
 
-    <table>
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -16,24 +16,11 @@
             <tr>
                 <td><a href="{{ path('origen_show', { 'id': origen.id }) }}">{{ origen.id }}</a></td>
                 <td>{{ origen.descripcion }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('origen_show', { 'id': origen.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('origen_edit', { 'id': origen.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td><a href="{{ path('origen_edit', { 'id': origen.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-edit"></i>edit</a>
+                <a href="{{ path('origen_delete', { 'id': origen.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-del"></i>Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('origen_new') }}">Create a new origen</a>
-        </li>
-    </ul>
+            <a href="{{ path('origen_new') }}" class="btn btn-primary">Crear</a>
 {% endblock %}
