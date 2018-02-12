@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Estilos list</h1>
+    <h1>Lista de Estilos</h1>
 
-    <table>
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -14,26 +14,13 @@
         <tbody>
         {% for estilo in estilos %}
             <tr>
-                <td><a href="{{ path('estilo_show', { 'id': estilo.id }) }}">{{ estilo.id }}</a></td>
+                <td><a href="{{ path('estilo_show', { 'id': estilo.id }, "Mostrar Estilo") }}">{{ estilo.id }}</a></td>
                 <td>{{ estilo.descripcion }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('estilo_show', { 'id': estilo.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('estilo_edit', { 'id': estilo.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td><a href="{{ path('estilo_edit', { 'id': estilo.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-edit"></i>edit</a>
+                <a href="{{ path('estilo_delete', { 'id': estilo.id }) }}"class="btn btn-default btn-sm"><i class="fa fa-del"></i>Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('estilo_new') }}">Create a new estilo</a>
-        </li>
-    </ul>
+            <a href="{{ path('estilo_new') }}" class="btn btn-primary">Crear</a>
 {% endblock %}

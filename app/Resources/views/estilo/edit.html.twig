@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Estilo edit</h1>
+    <h1>Editar estilo</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    <div class="panel panel-default">
+		<div class="panel-body">
+
+     {{ form_start(edit_form, {"attr":{"novalidate":"novalidate"}}) }}
+      <div class="form-group col-xs-6">
+        <label>{{ form_label(edit_form.descripcion) }}</label>
+        {{ form_errors(edit_form.descripcion)}}
+        {{ form_widget(edit_form.descripcion, {'attr' : {'class' : 'form-control'} }) }}
+    </div>
+  </div>
+    <div class="panel-footer">
+
+      <button type="submit" class="btn  btn-success">Guardar</button>
+      <a class="btn " href="{{ path('estilo_index') }}">Cancelar</a>
+
     {{ form_end(edit_form) }}
+    </div>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('estilo_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

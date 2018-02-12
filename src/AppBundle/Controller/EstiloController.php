@@ -48,7 +48,12 @@ class EstiloController extends Controller
             $em->persist($estilo);
             $em->flush();
 
-            return $this->redirectToRoute('estilo_show', array('id' => $estilo->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Estilo agregado con éxito.'
+           );
+            return $this->redirectToRoute('estilo_index');
         }
 
         return $this->render('estilo/new.html.twig', array(
@@ -63,12 +68,13 @@ class EstiloController extends Controller
      * @Route("/{id}", name="estilo_show")
      * @Method("GET")
      */
-    public function showAction(Estilo $estilo)
+    public function showAction(Estilo $estilo, $titulo = "Estilo")
     {
         $deleteForm = $this->createDeleteForm($estilo);
 
         return $this->render('estilo/show.html.twig', array(
             'estilo' => $estilo,
+            'titulo' => $titulo,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -87,8 +93,12 @@ class EstiloController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('estilo_edit', array('id' => $estilo->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Estilo editado con éxito.'
+           );
+            return $this->redirectToRoute('estilo_index');
         }
 
         return $this->render('estilo/edit.html.twig', array(
@@ -106,6 +116,7 @@ class EstiloController extends Controller
      */
     public function deleteAction(Request $request, Estilo $estilo)
     {
+
         $form = $this->createDeleteForm($estilo);
         $form->handleRequest($request);
 
@@ -114,7 +125,11 @@ class EstiloController extends Controller
             $em->remove($estilo);
             $em->flush();
         }
-
+        //Crea un mensaje de session Flash que se mostrará en la página.
+       $this->addFlash(
+           'notice',
+           'Estilo eliminado con éxito.'
+       );
         return $this->redirectToRoute('estilo_index');
     }
 
