@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Origen;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Origen controller.
@@ -47,8 +48,12 @@ class OrigenController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($origen);
             $em->flush();
-
-            return $this->redirectToRoute('origen_show', array('id' => $origen->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+            $this->addFlash(
+               'notice',
+               'origen agregado con éxito.'
+            );
+            return $this->redirectToRoute('origen_index');
         }
 
         return $this->render('origen/new.html.twig', array(
@@ -88,7 +93,12 @@ class OrigenController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('origen_edit', array('id' => $origen->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+            $this->addFlash(
+               'notice',
+               'origen editado con éxito.'
+            );
+            return $this->redirectToRoute('origen_index');
         }
 
         return $this->render('origen/edit.html.twig', array(
@@ -115,6 +125,11 @@ class OrigenController extends Controller
             $em->flush();
         }
 
+        //Crea un mensaje de session Flash que se mostrará en la página.
+        $this->addFlash(
+           'notice',
+           'origen eliminado con éxito.'
+        );
         return $this->redirectToRoute('origen_index');
     }
 

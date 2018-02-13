@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cerveza</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cerveza.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ cerveza.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ cerveza.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ cerveza.precio }}</td>
+            </tr>
+            <tr>
+                <th>Destacada</th>
+                <td>{% if cerveza.destacada %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Alcohol</th>
+                <td>{{ cerveza.alcohol }}</td>
+            </tr>
+            <tr>
+                <th>Foto</th>
+                <td>{{ cerveza.foto }}</td>
+            </tr>
+            <tr>
+                <th>Presentacion</th>
+                <td>{{ cerveza.presentacion }}</td>
+            </tr>
+            <tr>
+                <th>Promo</th>
+                <td>{% if cerveza.promo %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cerveza_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('cerveza_edit', { 'id': cerveza.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

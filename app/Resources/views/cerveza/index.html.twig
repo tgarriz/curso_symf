@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cervezas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Destacada</th>
+                <th>Alcohol</th>
+                <th>Foto</th>
+                <th>Presentacion</th>
+                <th>Promo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cerveza in cervezas %}
+            <tr>
+                <td><a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}">{{ cerveza.id }}</a></td>
+                <td>{{ cerveza.nombre }}</td>
+                <td>{{ cerveza.descripcion }}</td>
+                <td>{{ cerveza.precio }}</td>
+                <td>{% if cerveza.destacada %}Yes{% else %}No{% endif %}</td>
+                <td>{{ cerveza.alcohol }}</td>
+                <td>{{ cerveza.foto }}</td>
+                <td>{{ cerveza.presentacion }}</td>
+                <td>{% if cerveza.promo %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cerveza_edit', { 'id': cerveza.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cerveza_new') }}">Create a new cerveza</a>
+        </li>
+    </ul>
+{% endblock %}
