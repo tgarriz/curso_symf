@@ -1,16 +1,67 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Cerveza creation</h1>
+    <h1>Nueva Cerveza</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <div class="panel panel-default">
+    <div class="panel-body">
 
-    <ul>
-        <li>
-            <a href="{{ path('cerveza_index') }}">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+      {# {{ form_start(form) }} #}
+       {{ form_start(form, {"attr":{"novalidate":"novalidate"}}) }}
+
+        <div class="form-group col-xs-6">
+              <label>{{ form_label(form.descripcion) }}</label>
+              {{ form_errors(form.descripcion)}}
+              {{ form_widget(form.descripcion, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.nombre) }}</label>
+              {{ form_errors(form.nombre)}}
+              {{ form_widget(form.nombre, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.precio) }}</label>
+              {{ form_errors(form.precio)}}
+              {{ form_widget(form.precio, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.destacada) }}</label>
+              {{ form_errors(form.destacada)}}
+              {{ form_widget(form.destacada, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.alcohol) }}</label>
+              {{ form_errors(form.alcohol)}}
+              {{ form_widget(form.alcohol, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.foto) }}</label>
+              {{ form_errors(form.foto)}}
+              {{ form_widget(form.foto, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.presentacion) }}</label>
+              {{ form_errors(form.presentacion)}}
+              {{ form_widget(form.presentacion, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.promo) }}</label>
+              {{ form_errors(form.promo)}}
+              {{ form_widget(form.promo, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.estilo) }}</label>
+              {{ form_errors(form.estilo)}}
+              {{ form_widget(form.estilo, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.origen) }}</label>
+              {{ form_errors(form.origen)}}
+              {{ form_widget(form.origen, {'attr' : {'class' : 'form-control'} }) }}
+
+              <label>{{ form_label(form.color) }}</label>
+              {{ form_errors(form.color)}}
+              {{ form_widget(form.color, {'attr' : {'class' : 'form-control'} }) }}
+
+          </div>
+
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-success">Guardar</button>
+      {{ form_end(form) }}
+      <a class="btn " href="{{ path('cerveza_index') }}">Cancelar</a>
+
+    </div>
+    </div>
+    {% endblock %}

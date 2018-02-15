@@ -3,19 +3,15 @@
 {% block body %}
     <h1>Cervezas list</h1>
 
-    <table>
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Precio</th>
-                <th>Destacada</th>
-                <th>Alcohol</th>
                 <th>Foto</th>
-                <th>Presentacion</th>
-                <th>Promo</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,29 +21,15 @@
                 <td>{{ cerveza.nombre }}</td>
                 <td>{{ cerveza.descripcion }}</td>
                 <td>{{ cerveza.precio }}</td>
-                <td>{% if cerveza.destacada %}Yes{% else %}No{% endif %}</td>
-                <td>{{ cerveza.alcohol }}</td>
                 <td>{{ cerveza.foto }}</td>
-                <td>{{ cerveza.presentacion }}</td>
-                <td>{% if cerveza.promo %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('cerveza_edit', { 'id': cerveza.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <td><a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}" class="btn btn-default btn-sm">show</a>
+                    <a href="{{ path('cerveza_edit', { 'id': cerveza.id }) }}" class="btn btn-default btn-sm">edit</a>
+                    <a href="{{ path('cerveza_delete', { 'id': cerveza.id }) }}" class="btn btn-default btn-sm">Delete</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('cerveza_new') }}" class="btn btn-primary">Crear</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('cerveza_new') }}">Create a new cerveza</a>
-        </li>
-    </ul>
 {% endblock %}
