@@ -28,6 +28,7 @@ class Color
      * @Assert\NotBlank(message = "Espe campo no puede ser vacio")
      *
      * @ORM\Column(name="descripcion", type="string", length=100, unique=true)
+     *
      */
     private $descripcion;
 

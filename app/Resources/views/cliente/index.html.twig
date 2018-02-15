@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Clientes list</h1>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dni</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cliente in clientes %}
+            <tr>
+                <td><a href="{{ path('cliente_show', { 'id': cliente.id }) }}">{{ cliente.id }}</a></td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.apellido }}</td>
+                <td>{{ cliente.dni }}</td>
+                <td> <a href="{{ path('cliente_show', { 'id': cliente.id }) }}" class="btn btn-default btn-sm">Ver</a>
+                     <a href="{{ path('cliente_edit', { 'id': cliente.id }) }}" class="btn btn-default btn-sm">Editar</a>
+                     <a href="{{ path('cliente_delete', { 'id': cliente.id }) }}" class="btn btn-default btn-sm">Borrar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            <a href="{{ path('cliente_new') }}" class="btn btn-primary">Crear</a>
+{% endblock %}

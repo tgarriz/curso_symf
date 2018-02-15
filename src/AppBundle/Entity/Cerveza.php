@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Cerveza
@@ -26,6 +27,7 @@ class Cerveza
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="El nombre no puede quedar en blanco")
      */
     private $nombre;
 
@@ -54,6 +56,7 @@ class Cerveza
      * @var int
      *
      * @ORM\Column(name="alcohol", type="integer")
+     *@Assert\NotBlank(message="El grado de alcohol no puede ser nulo")
      */
     private $alcohol;
 

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nuevo Cliente</h1>
+    <div class="panel panel-default">
+    <div class="panel-body">
+
+    {{ form_start(form, {"attr":{"novalidate":"novalidate"}}) }}
+    <div class="form-group col-xs-6">
+          <label>{{ form_label(form.nombre) }}</label>
+          {{ form_errors(form.nombre)}}
+          {{ form_widget(form.nombre, {'attr' : {'class' : 'form-control'} }) }}
+
+          <label>{{ form_label(form.apellido) }}</label>
+          {{ form_errors(form.apellido)}}
+          {{ form_widget(form.apellido, {'attr' : {'class' : 'form-control'} }) }}
+
+          <label>{{ form_label(form.dni) }}</label>
+          {{ form_errors(form.dni)}}
+          {{ form_widget(form.dni, {'attr' : {'class' : 'form-control'} }) }}
+
+  </div>
+
+</div>
+<div class="panel-footer">
+<button type="submit" class="btn btn-success">Guardar</button>
+{{ form_end(form) }}
+<a class="btn " href="{{ path('cliente_index') }}">Cancelar</a>
+
+</div>
+</div>
+{% endblock %}

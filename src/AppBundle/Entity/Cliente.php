@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Cliente
@@ -26,6 +27,7 @@ class Cliente
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     *@Assert\NotBlank(message="El nombre no puede quedar en blanco")
      */
     private $nombre;
 
@@ -33,6 +35,7 @@ class Cliente
      * @var string
      *
      * @ORM\Column(name="apellido", type="string", length=255)
+     *@Assert\NotBlank(message="El apellido no puede quedar en blanco")
      */
     private $apellido;
 
@@ -40,6 +43,12 @@ class Cliente
      * @var int
      *
      * @ORM\Column(name="dni", type="integer", unique=true)
+     * @Assert\Range(
+     *      min = "5000000",
+     *      max = "99999999",
+     *      minMessage = "El dni no puede ser inferior a 5000000",
+     *      maxMessage = "El dni no puede ser superior a 99999999"
+     * )
      */
     private $dni;
 
@@ -47,7 +56,7 @@ class Cliente
      *@ORM\OneToMany(targetEntity="Cliente", mappedBy="cliente")
      */
     private $pedidos;
-	
+
 	public function __construct() {
 		$this->pedidos = new ArrayCollection();
 	}
@@ -169,4 +178,3 @@ class Cliente
         return $this->pedidos;
     }
 }
-

@@ -25,6 +25,7 @@ class Origen
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     *  @Assert\NotBlank(message = "Espe campo no puede ser vacio")
      */
     private $descripcion;
 
