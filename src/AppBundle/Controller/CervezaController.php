@@ -99,7 +99,7 @@ class CervezaController extends Controller
                'Cerveza editado con éxito.'
            );
 
-            return $this->redirectToRoute('cerveza_edit', array('id' => $cerveza->getId()));
+            return $this->redirectToRoute('cerveza_index', array('id' => $cerveza->getId()));
         }
 
         return $this->render('cerveza/edit.html.twig', array(

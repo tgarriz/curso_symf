@@ -2,7 +2,10 @@
 
 {% block body %}
     <h1>Cliente</h1>
-
+    <div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-group col-xs-6">
+          {{ dump() }}
     <table>
         <tbody>
             <tr>
@@ -23,18 +26,13 @@
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('cliente_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('cliente_edit', { 'id': cliente.id }) }}">Edit</a>
-        </li>
-        <li>
+  </div>
+  </div>
+    <div class="panel-footer">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <button type="submit" value="Delete" class="btn  btn-success">Borrar</button>
+              <a class="btn " href="{{ path('cliente_index') }}">Volver</a>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </div>
+    </div>
 {% endblock %}

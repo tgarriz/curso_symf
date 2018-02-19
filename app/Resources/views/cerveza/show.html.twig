@@ -19,6 +19,9 @@
             <th>Foto</th>
             <th>Presentacion</th>
             <th>Promo</th>
+            <th>Estilo</th>
+            <th>Origen</th>
+            <th>Color</th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +35,9 @@
                 <td>{{ cerveza.foto }}</td>
               <td>{{ cerveza.presentacion }}</td>
               <td>{% if cerveza.promo %}Yes{% else %}No{% endif %}</td>
+              <td>{{ cerveza.estilo }}</td>
+              <td>{{ cerveza.origen }}</td>
+              <td>{{ cerveza.color }}</td>
             </tr>
         </tbody>
     </table>
