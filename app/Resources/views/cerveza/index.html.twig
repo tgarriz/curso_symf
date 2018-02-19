@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1>Cervezas list</h1>
-
+    <div class="panel panel-default">
+		<div class="panel-body">
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -30,6 +31,9 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('cerveza_new') }}" class="btn btn-primary">Crear</a>
-
+  </div>
+</div>
+      <div class="panel-footer">
+        <a href="{{ path('cerveza_new') }}" class="btn btn-primary">Crear</a>
+      </div>
 {% endblock %}
