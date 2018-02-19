@@ -93,6 +93,12 @@ class ClienteController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Cliente guardado con éxito.'
+           );
+
             return $this->redirectToRoute('cliente_edit', array('id' => $cliente->getId()));
         }
 
@@ -118,6 +124,12 @@ class ClienteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($cliente);
             $em->flush();
+
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Cliente borrado con éxito.'
+           );
         }
 
         return $this->redirectToRoute('cliente_index');

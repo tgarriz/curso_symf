@@ -42,6 +42,7 @@ class Cerveza
      * @var string
      *
      * @ORM\Column(name="precio", type="decimal", precision=10, scale=2, nullable=true)
+    * @Assert\NotBlank(message="El precio no puede estar vacio")
      */
     private $precio;
 

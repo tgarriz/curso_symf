@@ -48,7 +48,12 @@ class CervezaController extends Controller
             $em->persist($cerveza);
             $em->flush();
 
-            return $this->redirectToRoute('cerveza_show', array('id' => $cerveza->getId()));
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Cerveza agregada con éxito.'
+           );
+            return $this->redirectToRoute('cerveza_index', array('id' => $cerveza->getId()));
         }
 
         return $this->render('cerveza/new.html.twig', array(
@@ -88,6 +93,12 @@ class CervezaController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Cerveza editado con éxito.'
+           );
+
             return $this->redirectToRoute('cerveza_edit', array('id' => $cerveza->getId()));
         }
 
@@ -113,6 +124,12 @@ class CervezaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($cerveza);
             $em->flush();
+
+            //Crea un mensaje de session Flash que se mostrará en la página.
+           $this->addFlash(
+               'notice',
+               'Cerveza borrado con éxito.'
+           );
         }
 
         return $this->redirectToRoute('cerveza_index');
