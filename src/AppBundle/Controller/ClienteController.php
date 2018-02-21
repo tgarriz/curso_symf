@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Cliente;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Cliente controller.
@@ -44,18 +45,24 @@ class ClienteController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($cliente);
             $em->flush();
 
             //Crea un mensaje de session Flash que se mostrará en la página.
-           $this->addFlash(
-               'notice',
-               'Ciente agregado con éxito.'
-           );
-            return $this->redirectToRoute('cliente_index');
+              $this->addFlash(
+                'success',
+                'Ciente agregado con éxito.'
+              );
+              return $this->redirectToRoute('cliente_index');
         }
-
+        elseif ($form->isSubmitted() && !$form->isValid()) {
+          $this->addFlash(
+              'danger',
+              'Error al agregar el Cliente.'
+          );
+        }
         return $this->render('cliente/new.html.twig', array(
             'cliente' => $cliente,
             'form' => $form->createView(),
@@ -95,11 +102,17 @@ class ClienteController extends Controller
 
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
+               'success',
                'Cliente guardado con éxito.'
            );
 
             return $this->redirectToRoute('cliente_edit', array('id' => $cliente->getId()));
+        }
+        elseif ($editForm->isSubmitted() && !$editForm->isValid()) {
+          $this->addFlash(
+              'danger',
+              'Error al editar el Cliente.'
+          );
         }
 
         return $this->render('cliente/edit.html.twig', array(
@@ -127,9 +140,15 @@ class ClienteController extends Controller
 
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
+               'success',
                'Cliente borrado con éxito.'
            );
+        }
+        elseif ($form->isSubmitted() && $form->isValid()){
+          $this->addFlash(
+              'danger',
+              'Error cliente no borrado.'
+          );
         }
 
         return $this->redirectToRoute('cliente_index');

@@ -51,10 +51,15 @@ class EstiloController extends Controller
 
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
+               'success',
                'Estilo agregado con éxito.'
            );
             return $this->redirectToRoute('estilo_index');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+          $this->addFlash(
+              'danger',
+              'Error agregando estilo.'
+          );
         }
 
         return $this->render('estilo/new.html.twig', array(
@@ -113,10 +118,15 @@ class EstiloController extends Controller
             $this->getDoctrine()->getManager()->flush();
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
+               'success',
                'Estilo editado con éxito.'
            );
             return $this->redirectToRoute('estilo_index');
+        } elseif ($editForm->isSubmitted() && !$editForm->isValid()) {
+          $this->addFlash(
+              'danger',
+              'No se pudo guardar estilo'
+          );
         }
 
         return $this->render('estilo/edit.html.twig', array(
@@ -145,7 +155,7 @@ class EstiloController extends Controller
         }
         //Crea un mensaje de session Flash que se mostrará en la página.
        $this->addFlash(
-           'notice',
+           'success',
            'Estilo eliminado con éxito.'
        );
         return $this->redirectToRoute('estilo_index');

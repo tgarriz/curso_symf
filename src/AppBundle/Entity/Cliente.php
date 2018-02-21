@@ -27,7 +27,7 @@ class Cliente
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
-     *@Assert\NotBlank(message="El nombre no puede quedar en blanco")
+     * @Assert\NotBlank(message="El nombre no puede quedar en blanco")
      */
     private $nombre;
 
@@ -44,10 +44,10 @@ class Cliente
      *
      * @ORM\Column(name="dni", type="integer", unique=true)
      * @Assert\Range(
-     *      min = "5000000",
-     *      max = "99999999",
-     *      minMessage = "El dni no puede ser inferior a 5000000",
-     *      maxMessage = "El dni no puede ser superior a 99999999"
+     *      min = 5000000,
+     *      max = 99999999,
+     *      minMessage = "debe ser mayor a 5000000",
+     *      maxMessage = "debe ser menor a 99999999"
      * )
      */
     private $dni;

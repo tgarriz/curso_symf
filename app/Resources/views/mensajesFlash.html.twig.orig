@@ -1,0 +1,16 @@
+{% for type, messages in app.session.flashbag.all() %}
+    {% for key, message in messages %}
+      {% if type == "success" %}
+          {% set class="success" %}
+          {% set icon="fa-check" %}
+      {% else %}
+          {% if type == "danger" %}
+            {% set class="danger" %}
+            {% set icon="fa-times" %}
+          {% endif %}
+      {% endif %}
+      <div class="alert alert-{{ class }}">
+          <i class="fa {{ icon }}"></i> {{ message|raw }}
+      </div>
+    {% endfor %}
+{% endfor %}

@@ -54,6 +54,11 @@ class OrigenController extends Controller
                'origen agregado con éxito.'
             );
             return $this->redirectToRoute('origen_index');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+          $this->addFlash(
+             'danger',
+             'No se pudo guardar el origen.'
+          );
         }
 
         return $this->render('origen/new.html.twig', array(
@@ -99,6 +104,11 @@ class OrigenController extends Controller
                'origen editado con éxito.'
             );
             return $this->redirectToRoute('origen_index');
+        } elseif ($editForm->isSubmitted() && !$editForm->isValid()) {
+          $this->addFlash(
+             'danger',
+             'No se pudo guardar el origen.'
+          );
         }
 
         return $this->render('origen/edit.html.twig', array(
