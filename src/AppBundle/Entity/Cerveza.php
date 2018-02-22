@@ -83,6 +83,12 @@ class Cerveza
      * @var int
      *
      * @ORM\Column(name="presentacion", type="integer", nullable=true)
+     *@Assert\Range(
+     *      min = 0,
+     *      max = 99,
+     *      minMessage = "Debe ser un numero entre 0 y 99",
+     *      maxMessage = "Debe ser un numero entre 0 y 99"
+     *)
      */
     private $presentacion;
 
