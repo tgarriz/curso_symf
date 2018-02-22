@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class CervezaType extends AbstractType
 {
@@ -26,8 +28,9 @@ class CervezaType extends AbstractType
                   'placeholder' => 'Descripción'
               )))
 
-          ->add('alcohol')
-          ->add('precio')
+          ->add('alcohol', NumberType::class)
+          ->add('precio', MoneyType::class, array('currency' => 'ARS',
+                                                'invalid_message' => 'Debe ser un numero',))
           ->add('foto', FileType::class, array('label' => 'Imágen (JPG/PNG)',
                                           "data_class" => null,
                                           "required" => true))

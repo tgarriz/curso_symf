@@ -68,12 +68,22 @@ class CervezaController extends Controller
 
                 // Actualiza la propiedad Foto con el nuevo nombre del archivo
                 $cerveza->setFoto($fileName);
-            }
 
-              $em->persist($cerveza);
-              $em->flush();
-
-              return $this->redirectToRoute('cerveza_show', array('id' => $cerveza->getId()));
+                $em->persist($cerveza);
+                $em->flush();
+             }
+              //Crea un mensaje de session Flash que se mostrará en la página.
+                $this->addFlash(
+                  'success',
+                  'Cerveza agregada con éxito.'
+                );
+                return $this->redirectToRoute('cerveza_index');
+          }
+          elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash(
+                'danger',
+                'Error al agregar el Cerveza.'
+            );
           }
 
           return $this->render('cerveza/new.html.twig', array(
@@ -114,11 +124,17 @@ class CervezaController extends Controller
 
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
-               'Cerveza editado con éxito.'
+               'success',
+               'Cerveza guardada con éxito.'
            );
 
-            return $this->redirectToRoute('cerveza_index', array('id' => $cerveza->getId()));
+            return $this->redirectToRoute('cerveza_index');
+        }
+        elseif ($editForm->isSubmitted() && !$editForm->isValid()) {
+          $this->addFlash(
+              'danger',
+              'Error al editar el Cerveza.'
+          );
         }
 
         return $this->render('cerveza/edit.html.twig', array(
@@ -147,7 +163,7 @@ class CervezaController extends Controller
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
                'notice',
-               'Cerveza borrado con éxito.'
+               'Cerveza borrada con éxito.'
            );
         }
 

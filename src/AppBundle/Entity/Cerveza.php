@@ -42,7 +42,12 @@ class Cerveza
      * @var string
      *
      * @ORM\Column(name="precio", type="decimal", precision=10, scale=2, nullable=true)
-    * @Assert\NotBlank(message="El precio no puede estar vacio")
+    *  @Assert\Range(
+    *      min = 0,
+    *      max = 999,
+    *      minMessage = "El porcentaje debe ser un numero entre 0 y 999",
+    *      maxMessage = "El porcentaje debe ser un numero entre 0 y 999"
+    * )
      */
     private $precio;
 
@@ -57,7 +62,13 @@ class Cerveza
      * @var int
      *
      * @ORM\Column(name="alcohol", type="integer")
-     *@Assert\NotBlank(message="El grado de alcohol no puede ser nulo")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 99,
+     *      minMessage = "El porcentaje debe ser un numero entre 0 y 99",
+     *      maxMessage = "El porcentaje debe ser un numero entre 0 y 99"
+     * )
+
      */
     private $alcohol;
 
