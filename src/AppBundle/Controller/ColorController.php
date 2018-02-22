@@ -51,10 +51,15 @@ class ColorController extends Controller
 
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
+               'success',
                'Color agregado con éxito.'
            );
             return $this->redirectToRoute('color_index');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+          $this->addFlash(
+              'danger',
+              'Error color.'
+          );
         }
 
         return $this->render('color/new.html.twig', array(
@@ -97,10 +102,16 @@ class ColorController extends Controller
             //return $this->redirectToRoute('color_edit', array('id' => $color->getId()));
             //Crea un mensaje de session Flash que se mostrará en la página.
            $this->addFlash(
-               'notice',
+               'success',
                'Color editado con éxito.'
            );
             return $this->redirectToRoute('color_index');
+        } elseif ($editForm->isSubmitted() && !$editForm->isValid()) {
+          //Crea un mensaje de session Flash que se mostrará en la página.
+            $this->addFlash(
+             'danger',
+             'Error al guardar color.'
+            );
         }
 
         return $this->render('color/edit.html.twig', array(
@@ -121,18 +132,25 @@ class ColorController extends Controller
         $form = $this->createDeleteForm($color);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if ($form->isSubmitted() && $form->isValid()) {
             $em->remove($color);
             $em->flush();
-        }
 
-        //Crea un mensaje de session Flash que se mostrará en la página.
-       $this->addFlash(
-           'notice',
-           'Color eliminado con éxito.'
-       );
+            //Crea un mensaje de session Flash que se mostrará en la página.
+            $this->addFlash(
+               'success',
+               'Color eliminado con éxito.'
+             );
+
         return $this->redirectToRoute('color_index');
+    } elseif ($form->isSubmitted() && !$form->isValid()) {
+          //Crea un mensaje de session Flash que se mostrará en la página.
+            $this->addFlash(
+              'danger',
+              'Error.'
+            );
+        }
     }
 
     /**

@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Cervezas list</h1>
-    <div class="panel panel-default">
-		<div class="panel-body">
-    <table class="table table-bordered table-hover">
+    <h1>Cervezas</h1>
+
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
+                <th>Alcohol</th>
                 <th>Precio</th>
+                <th>Destacada</th>
+                <th>Origen</th>
                 <th>Foto</th>
-                <th>Acciones</th>
+                <th>Presentacion</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,19 +24,20 @@
                 <td><a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}">{{ cerveza.id }}</a></td>
                 <td>{{ cerveza.nombre }}</td>
                 <td>{{ cerveza.descripcion }}</td>
+                <td>{{ cerveza.alcohol }}</td>
                 <td>{{ cerveza.precio }}</td>
-                <td>{{ cerveza.foto }}</td>
-                <td><a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}" class="btn btn-default btn-sm">show</a>
-                    <a href="{{ path('cerveza_edit', { 'id': cerveza.id }) }}" class="btn btn-default btn-sm">edit</a>
-                    <a href="{{ path('cerveza_delete', { 'id': cerveza.id }) }}" class="btn btn-default btn-sm">Delete</a>
+                <td>{% if cerveza.destacada %}Yes{% else %}No{% endif %}</td>
+                <td>{{ cerveza.origen }}</td>
+                <td><img src="{{asset('assets/img/uploads/' ~ cerveza.foto) }}" class="foto-mini"></td>
+                <td>{{ cerveza.presentacion }}</td>
+                <td>
+                    <a href="{{ path('cerveza_show', { 'id': cerveza.id }) }}" class="btn btn-default">Ver</a>
+                    <a href="{{ path('cerveza_edit', { 'id': cerveza.id }) }}" class="btn btn-default">Editar</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-  </div>
-</div>
-      <div class="panel-footer">
-        <a href="{{ path('cerveza_new') }}" class="btn btn-primary">Crear</a>
-      </div>
+
+            <a href="{{ path('cerveza_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</a>
 {% endblock %}

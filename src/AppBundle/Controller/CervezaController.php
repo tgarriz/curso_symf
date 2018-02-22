@@ -37,31 +37,50 @@ class CervezaController extends Controller
      * @Route("/new", name="cerveza_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
-        $cerveza = new Cerveza();
-        $form = $this->createForm('AppBundle\Form\CervezaType', $cerveza);
-        $form->handleRequest($request);
+     /**
+       * Creates a new cerveza entity.
+       *
+       * @Route("/new", name="cerveza_new")
+       * @Method({"GET", "POST"})
+       */
+      public function newAction(Request $request)
+      {
+          $cerveza = new Cerveza();
+          $form = $this->createForm('AppBundle\Form\CervezaType', $cerveza);
+          $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($cerveza);
-            $em->flush();
+          if ($form->isSubmitted() && $form->isValid()) {
+              $em = $this->getDoctrine()->getManager();
 
-            //Crea un mensaje de session Flash que se mostrará en la página.
-           $this->addFlash(
-               'notice',
-               'Cerveza agregada con éxito.'
-           );
-            return $this->redirectToRoute('cerveza_index', array('id' => $cerveza->getId()));
-        }
 
-        return $this->render('cerveza/new.html.twig', array(
-            'cerveza' => $cerveza,
-            'form' => $form->createView(),
-        ));
-    }
+              $formFiles = $request->files;
+              if(!is_null($formFiles->get('appbundle_cerveza')['foto'])){
+                // $file guarda la imagen
+                $file = $cerveza->getFoto();
+                // Genera un nombre unico antes de guardar
+                $fileName = sha1(uniqid()).'.'.$file->guessExtension();
+                // Mueve el erchivo al directorio uploads
+                $file->move(
+                    $this->getParameter('upload_dir'),
+                    $fileName
+                );
 
+
+                // Actualiza la propiedad Foto con el nuevo nombre del archivo
+                $cerveza->setFoto($fileName);
+            }
+
+              $em->persist($cerveza);
+              $em->flush();
+
+              return $this->redirectToRoute('cerveza_show', array('id' => $cerveza->getId()));
+          }
+
+          return $this->render('cerveza/new.html.twig', array(
+              'cerveza' => $cerveza,
+              'form' => $form->createView(),
+          ));
+      }
     /**
      * Finds and displays a cerveza entity.
      *
