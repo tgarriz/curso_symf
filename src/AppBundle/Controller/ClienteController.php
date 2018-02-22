@@ -99,7 +99,7 @@ class ClienteController extends Controller
                'Cliente guardado con éxito.'
            );
 
-            return $this->redirectToRoute('cliente_edit', array('id' => $cliente->getId()));
+            return $this->redirectToRoute('cliente_index');
         }
 
         return $this->render('cliente/edit.html.twig', array(
