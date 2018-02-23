@@ -24,8 +24,8 @@ class ClienteController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $clientes = $em->getRepository('AppBundle:Cliente')->findAll();
+        //$clientes = $em->getRepository('AppBundle:Cliente')->findAll();
+        $clientes = $em->getRepository('AppBundle:Cliente')->findBy(array(),array('nombre'=>'DESC'));
 
         return $this->render('cliente/index.html.twig', array(
             'clientes' => $clientes,
