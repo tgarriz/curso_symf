@@ -9,9 +9,15 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombre <a href="{{ path('cliente_index_order', { 'campo': 'nombre' }) }}"><i class="fa fa-angle-down" style="font-size:24px"></i></a></th>
-                <th>Apellido</th>
-                <th>Dni</th>
+                <th>Nombre <a href="{{ path('cliente_index_order', { 'campo': 'nombre', 'ord' : 'DESC' }) }}"><i class="fa fa-caret-down" style="font-size:24px"></i></a>
+                           <a href="{{ path('cliente_index_order', { 'campo': 'nombre', 'ord' : 'ASC' }) }}"><i class="fa fa-caret-up" style="font-size:24px"></i></a>
+                </th>
+                <th>Apellido <a href="{{ path('cliente_index_order', { 'campo': 'apellido', 'ord' : 'DESC' }) }}"><i class="fa fa-caret-down" style="font-size:24px"></i></a>
+                           <a href="{{ path('cliente_index_order', { 'campo': 'apellido', 'ord' : 'ASC' }) }}"><i class="fa fa-caret-up" style="font-size:24px"></i></a>
+                </th>
+                <th>Dni <a href="{{ path('cliente_index_order', { 'campo': 'dni', 'ord' : 'DESC' }) }}"><i class="fa fa-caret-down" style="font-size:24px"></i></a>
+                           <a href="{{ path('cliente_index_order', { 'campo': 'dni', 'ord' : 'ASC' }) }}"><i class="fa fa-caret-up" style="font-size:24px"></i></a>
+                </th>
                 <th>Actions</th>
             </tr>
         </thead>

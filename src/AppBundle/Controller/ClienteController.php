@@ -24,9 +24,7 @@ class ClienteController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        //$clientes = $em->getRepository('AppBundle:Cliente')->findAll();
-        $clientes = $em->getRepository('AppBundle:Cliente')->findBy(array(),array('nombre'=>'DESC'));
-
+        $clientes = $em->getRepository('AppBundle:Cliente')->findAll();
         return $this->render('cliente/index.html.twig', array(
             'clientes' => $clientes,
         ));
@@ -35,14 +33,14 @@ class ClienteController extends Controller
     /**
      * Lists all cliente entities.
      *
-     * @Route("/order/{campo}", name="cliente_index_order")
-     * @Method("GET")
+     * @Route("/order/{campo}/{ord}", name="cliente_index_order")
+     * @Method({"GET", "POST"})
      */
-    public function indexActionOrder(String $campo)
+    public function indexActionOrder(String $campo, String $ord)
     {
         $em = $this->getDoctrine()->getManager();
         //$clientes = $em->getRepository('AppBundle:Cliente')->findAll();
-        $clientes = $em->getRepository('AppBundle:Cliente')->findBy(array(),array($campo=>'ASC'));
+        $clientes = $em->getRepository('AppBundle:Cliente')->findBy(array(),array($campo=>$ord));
 
         return $this->render('cliente/index.html.twig', array(
             'clientes' => $clientes,
@@ -53,7 +51,7 @@ class ClienteController extends Controller
      * Creates a new cliente entity.
      *
      * @Route("/new", name="cliente_new")
-     * @Method({"GET", "POST"})
+     * @Method("GET")
      */
     public function newAction(Request $request)
     {

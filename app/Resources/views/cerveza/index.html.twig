@@ -7,10 +7,16 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombre</th>
+                <th>Nombre <a href="{{ path('cerveza_index_order', { 'campo': 'nombre', 'ord' : 'DESC' }) }}"><i class="fa fa-caret-down" style="font-size:24px"></i></a>
+                           <a href="{{ path('cerveza_index_order', { 'campo': 'nombre', 'ord' : 'ASC' }) }}"><i class="fa fa-caret-up" style="font-size:24px"></i></a>
+                </th>
                 <th>Descripción</th>
-                <th>Alcohol</th>
-                <th>Precio</th>
+                <th>Alcohol <a href="{{ path('cerveza_index_order', { 'campo': 'alcohol', 'ord' : 'DESC' }) }}"><i class="fa fa-caret-down" style="font-size:24px"></i></a>
+                           <a href="{{ path('cerveza_index_order', { 'campo': 'alcohol', 'ord' : 'ASC' }) }}"><i class="fa fa-caret-up" style="font-size:24px"></i></a>
+                </th>
+                <th>Precio <a href="{{ path('cerveza_index_order', { 'campo': 'precio', 'ord' : 'DESC' }) }}"><i class="fa fa-caret-down" style="font-size:24px"></i></a>
+                           <a href="{{ path('cerveza_index_order', { 'campo': 'precio', 'ord' : 'ASC' }) }}"><i class="fa fa-caret-up" style="font-size:24px"></i></a>
+                </th>
                 <th>Destacada</th>
                 <th>Origen</th>
                 <th>Foto</th>

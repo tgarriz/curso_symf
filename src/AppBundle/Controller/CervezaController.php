@@ -32,11 +32,19 @@ class CervezaController extends Controller
     }
 
     /**
-     * Creates a new cerveza entity.
+     * Lists all cerveza entities.
      *
-     * @Route("/new", name="cerveza_new")
+     * @Route("/order/{campo}/{ord}", name="cerveza_index_order")
      * @Method({"GET", "POST"})
      */
+    public function indexActionOrder(String $campo, String $ord)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cervezas = $em->getRepository('AppBundle:Cerveza')->findBy(array(),array($campo=>$ord));
+        return $this->render('cerveza/index.html.twig', array(
+            'cervezas' => $cervezas,
+        ));
+    }
      /**
        * Creates a new cerveza entity.
        *
