@@ -5,7 +5,13 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Cerveza;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Cerveza controller.
@@ -193,4 +199,37 @@ class CervezaController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+    * @Route("/cervezas/all", options={"expose"=true}, name="cervezas_get_all")
+    */
+    public function getCervezasAll(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        $aSelecionar = $request->query->get('select');
+
+        if ($aSelecionar == 'todas') {
+            $cervezas = $em->getRepository('AppBundle:Cerveza')->findAll();
+        }elseif($aSelecionar == 'destacadas') {
+            $cervezas = $em->getRepository('AppBundle:Cerveza')->getDestacadas();
+        }else{
+            $origen = $em->getRepository('AppBundle:Origen')->find($aSelecionar);
+            $cervezas = $em->getRepository('AppBundle:Cerveza')->getPorOrigen($origen);
+        }
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        // Add Circular reference handler
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $cervezasTojson = $serializer->serialize($cervezas, 'json');
+        return new JsonResponse($cervezasTojson);
+
+    }
+
 }

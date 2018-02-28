@@ -29,8 +29,12 @@
 
         {% block javascripts %}
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			       <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+			       <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
           <!-- Include all compiled plugins (below), or include individual files as needed -->
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+          <script src="{{ asset('assets/js/cervezas.js') }}"></script>
+          <script src="{{ asset('assets/js/main.js') }}"></script>
         {% endblock %}
 
     </body>

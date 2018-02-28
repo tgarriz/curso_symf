@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}{% endblock  %}
+
+{% block body %}
+    <form method="POST" action="{{ path('finalizar') }}" id="form_delivery">
+        <input type="hidden" name="delivery" id="delivery_cervezas">
+    </form>
+    {# Section banner #}
+    <section class="jumbotron text-center">
+        <div class="container">
+						<img src="{{ asset('assets/img/beers_banner.png')}}" width="100%" >
+            <h1 class="jumbotron-heading">DPSIT BEERS</h1>
+            <p class="lead text-muted">Delivery ONLINE</p>
+        </div>
+    </section>
+
+    {# Section pedido #}
+    <section>
+        <div class="row">
+            {# Columna de la izquierda datos Cerveza #}
+            <div class="col-xs-7">
+                {# Row Select Cerveza #}
+                <div class="row">
+                    <div class="col-xs-8">
+                        <select id="preSelect" onchange="cervezas.load()" class="form-control">
+                          <option value="todas">Todas...</option>
+                          <option value="destacadas">Solo Destacadas...</option>
+                          <optgroup label="por Origen">
+                            {% for origen in origenes %}
+                              <option value="{{origen.id}}">{{origen.descripcion}}</option>
+                            {% endfor %}
+                          </optgroup>
+                        </select>
+                        <select name="selectCerveza" id="selectCerveza" class="form-control" onchange="cervezas.onSelectChange()">
+                        </select>
+                        <br>
+                    </div>
+
+                </div>
+
+			       {# Row datos Cerveza #}
+          		<div class="row">
+          			<div class="col-xs-8">
+                      <table class="table table-bordered">
+                        <tbody>
+            							<tr>
+            								<th class="cervezaTitle" colspan="4"><span id="nombre"></span></th>
+            							</tr>
+            							<tr>
+            								<th class="cervezaSubtitle" colspan="4">Características</th>
+            							</tr>
+            							<tr>
+            								<th>Origen</th>
+            								<td colspan="3"><span id="origen"></span></td>
+            							</tr>
+            							<tr>
+            								<th>Estilo</th>
+            								<td colspan="3"><span id="estilo"></span></td>
+            							</tr>
+            							<tr>
+            								<th>Color</th>
+            								<td colspan="3"><span id="color"></span></td>
+            							</tr>
+            							<tr>
+            								<th>Precio</th>
+            								<td>$ <span id="punit"></span></td>
+            								<th>Presentación</th>
+            								<td><span id="presentacion"></span></td>
+            							</tr>
+            							<tr>
+            								<td colspan="4">
+            									<p>
+            									<span id="descripcion"></span>
+            									</p>
+            								</td>
+            							</tr>
+            						</tbody>
+            					</table>
+                    </div>
+          			<div class="col-xs-4 card">
+                        <img src="{{ asset('assets/img/placeholder.png') }}" id="imgBeer" class="foto" >
+                    <div id="loading" class="hidden"><i class="fa fa-spinner fa-spin"></i> Cargando...</div>
+          			</div>
+          		</div>
+
+          		{# Row Agrega items #}
+                <div class="row">
+                    <div class="col-xs-8">
+                      <table class="table">
+            						<tr>
+            							<td>Cantidad <input type="number" name="cantidad" id="cantidad" value="1"></td>
+            							<td>
+                            <button type="button" class="btn btn-warning" onclick="cervezas.add()"><i class="fa fa-plus"></i> Agregar</button>
+                          </td>
+            						</tr>
+            					</table>
+    				        </div>
+    			     </div>
+            </div>
+
+            {# Columna Derecha Tabla pedido #}
+            <div class="col-xs-5">
+      		    <table class="table table-bordered table-condensed" id="tablaPedidos">
+                    <caption class="cervezaSubtitle"><strong>Tu Pedido</strong></caption>
+      			   <thead>
+                  <tr>
+          					<th>#</th>
+          					<th>Cerveza</th>
+          					<th width="8%">Cant.</th>
+          					<th width="15%">P.Unit</th>
+          					<th width="15%">Subt.</th>
+          					<th width="6%">&nbsp;</th>
+                  </tr>
+      			   </thead>
+      			   <tbody></tbody>
+      		    </table>
+      		    <table class="table">
+      			   <caption class="cervezaSubtitle"><strong>Total de tu compra</strong></caption>
+      				<tr>
+      					<td align="right" width="65%"><span class="total">$ </span><span class="total" id="total">0</span></td>
+                <td width="20%"><button type="submmit" class="btn btn-success" form="form_delivery">Finalizar!</button></td>
+              </tr>
+      			</table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
