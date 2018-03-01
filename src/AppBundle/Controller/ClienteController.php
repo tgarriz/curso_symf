@@ -51,7 +51,7 @@ class ClienteController extends Controller
      * Creates a new cliente entity.
      *
      * @Route("/new", name="cliente_new")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
