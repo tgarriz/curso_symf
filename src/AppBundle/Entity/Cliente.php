@@ -177,4 +177,9 @@ class Cliente
     {
         return $this->pedidos;
     }
+
+    public function __toString()
+    {
+      return $this->nombre;
+    }
 }

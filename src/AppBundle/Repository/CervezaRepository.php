@@ -10,4 +10,21 @@ namespace AppBundle\Repository;
  */
 class CervezaRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function getDestacadas()
+  {
+    return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c FROM AppBundle:Cerveza c where c.destacada = true'
+            )
+            ->getResult();
+  }
+
+  public function getPorOrigen($origen)
+  {
+    return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c FROM AppBundle:Cerveza c where c.origen = :origen')
+            ->setParameter('origen', $origen)
+            ->getResult();
+  }
 }

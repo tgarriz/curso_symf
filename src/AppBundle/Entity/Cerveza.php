@@ -442,4 +442,9 @@ class Cerveza
     {
         $this->pedidosCervezas->removeElement($pedidosCerveza);
     }
+
+    public function __toString()
+    {
+      return $this->nombre;
+    }
 }

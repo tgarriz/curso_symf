@@ -15,7 +15,7 @@ const cervezas = {
             select: preSelect.val()
           }
   		})
-    		.done((data) => {JS
+    		.done((data) => {
   			let items = [];
     			select.append(`<option value="0">Seleccione una cerveza...</option>`);
           $.each(JSON.parse(data), (key, cerveza) => {
@@ -51,10 +51,11 @@ const cervezas = {
       const descripcion  = option.data('descripcion')
       const img          = (option.data('img') !== undefined ? option.data('img') : 'placeholder.png'  )
 
+      alert();
       this.opt.spanNombre.html(nombre);
-      this.opt.spanOrigen.html(origen);
-      this.opt.spanEstilo.html(estilo);
-      this.opt.spanColor.html(color);
+      origen !== undefined ? this.opt.spanOrigen.html(origen) : this.opt.spanOrigen.html("Sin Origen");
+      estilo !== undefined ? this.opt.spanEstilo.html(estilo) : this.opt.spanEstilo.html("Sin Estilo");
+      color !== undefined ? this.opt.spanColor.html(color) : this.opt.spanColor.html("Sin Color");
       this.opt.spanPUnit.html(punit);
       this.opt.spanPresentacion.html(presentacion);
       this.opt.spanDescripcion.html(descripcion);
