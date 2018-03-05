@@ -51,7 +51,6 @@ const cervezas = {
       const descripcion  = option.data('descripcion')
       const img          = (option.data('img') !== undefined ? option.data('img') : 'placeholder.png'  )
 
-      alert();
       this.opt.spanNombre.html(nombre);
       origen !== undefined ? this.opt.spanOrigen.html(origen) : this.opt.spanOrigen.html("Sin Origen");
       estilo !== undefined ? this.opt.spanEstilo.html(estilo) : this.opt.spanEstilo.html("Sin Estilo");
@@ -84,6 +83,7 @@ const cervezas = {
             <td>${cantidad}</td>
             <td>${punit}</td>
             <td>${punit*cantidad}</td>
+            <td style="visibility:hidden">${id}</td>
             <td>
             <a href="#" onclick="return cervezas.remove($(this).closest('tr'))">
             <i class="fa fa-trash"></i>&nbsp;</a></td>
@@ -98,20 +98,20 @@ const cervezas = {
     pedido.cervezaId = id;
     this.pedidos.push(pedido);
     this.opt.delivery.val(JSON.stringify(this.pedidos));
-    alert(this.pedidos.length());
+    console.log("tamano array: " + this.pedidos.length);
 
     },
     remove (row){
+      console.log("row.data('id') es: " + row.data('id'));
       const cantidad = row.data('cantidad');
       const punit = row.data('punit');
       const total = parseFloat(this.opt.spanTotal.html());
+      const ident = row.data('id');
       this.opt.spanTotal.html(total - parseFloat(punit*cantidad));
-      var aux = $.grep(this.pedidos,
-                          function(e){ if (row.nombre == e.nombre) {
-                                   return e;
-                          }   });
-      alert(aux);
-      this.pedidos.splice($.inArray(aux, this.pedidos),1);
+      let aux = $.grep(this.pedidos,function(e){ return e.cervezaId !== ident; });
+      console.log("aux es: " + aux);
+      this.pedidos = aux;
+      this.opt.delivery.val(JSON.stringify(this.pedidos));
       row.remove();
       return false;
     }
