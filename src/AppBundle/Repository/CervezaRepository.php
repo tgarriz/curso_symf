@@ -14,8 +14,7 @@ class CervezaRepository extends \Doctrine\ORM\EntityRepository
   {
     return $this->getEntityManager()
             ->createQuery(
-                'SELECT c FROM AppBundle:Cerveza c where c.destacada = true'
-            )
+                'SELECT c FROM AppBundle:Cerveza c where c.destacada = TRUE')
             ->getResult();
   }
 

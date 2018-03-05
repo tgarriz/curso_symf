@@ -411,13 +411,6 @@ class Cerveza
     {
         return $this->pedidosCervezas;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->pedidosCervezas = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add pedidosCerveza

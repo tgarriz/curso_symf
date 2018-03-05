@@ -98,13 +98,20 @@ const cervezas = {
     pedido.cervezaId = id;
     this.pedidos.push(pedido);
     this.opt.delivery.val(JSON.stringify(this.pedidos));
+    alert(this.pedidos.length());
 
     },
     remove (row){
       const cantidad = row.data('cantidad');
       const punit = row.data('punit');
       const total = parseFloat(this.opt.spanTotal.html());
-      this.opt.spanTotal.html(total - parseFloat(punit*cantidad))
+      this.opt.spanTotal.html(total - parseFloat(punit*cantidad));
+      var aux = $.grep(this.pedidos,
+                          function(e){ if (row.nombre == e.nombre) {
+                                   return e;
+                          }   });
+      alert(aux);
+      this.pedidos.splice($.inArray(aux, this.pedidos),1);
       row.remove();
       return false;
     }
