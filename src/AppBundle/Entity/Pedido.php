@@ -37,10 +37,10 @@ class Pedido
     private $cliente;
 
 	/**
-	 *@ORM\OneToMany(targetEntity="PedidoCerveza", mappedBy="pedido")
+ *@ORM\OneToMany(targetEntity="PedidoCerveza", mappedBy="pedido", cascade={"persist","remove"})
 	 */
     private $pedidoCervezas;
-	
+
 	public function __construct(){
 		$this->pedidoCervezas = new ArrayCollection();
 	}
@@ -140,4 +140,3 @@ class Pedido
         return $this->pedidoCervezas;
     }
 }
-

@@ -6,6 +6,23 @@
 	<div class="leyenda">
         <h1><i class="fa fa-check-circle fa-6 text-success" aria-hidden="true"></i> Pedido finalizado.</h1>
         <p class="lead">Estamos preparando tu pedido. En breve te lo llevamos :)</p>
+				<table class="table table-bordered">
+		        <thead>
+		            <tr>
+									<th>ipPedido</th>
+									<th>fechaPedido</th>
+									<th>cerveza</th>
+									<th>cantidad</th>
+								</tr>
+		        </thead>
+						<tbody>
+						{% for cerveza in cervezas %}
+							<tr>
+		            <td>{{ pedido.fecha }}</td>
+							</tr>
+						{% tbody %}
+					</tbody>
+				</table>
         <p><a href="{{path('homepage')}}" class="cervezaTitle">DPSITBeers <i class="fa fa-registered" aria-hidden="true"></i></a></p>
       </div>
 {% endblock  %}

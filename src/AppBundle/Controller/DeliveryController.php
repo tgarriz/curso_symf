@@ -6,6 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Pedido;
+use AppBundle\Entity\PedidoCerveza;
+use AppBundle\Entity\Cliente;
+
 
 class DeliveryController extends Controller
 {
@@ -38,7 +42,29 @@ class DeliveryController extends Controller
      */
     public function finalizarAction(Request $request)
     {
-        var_dump($request->request->get("delivery"));
+        //var_dump($request->request->get("delivery"));
+        $pedidos = json_decode($request->request->get("delivery"));
+        $em = $this->getDoctrine()->getManager();
+
+        $cliente = $em->getRepository('AppBundle:Cliente')->find(1);
+
+        $pedido = new Pedido();
+        $pedido->setFecha(new \Datetime("now"));
+        $pedido->setCliente($cliente);
+
+        foreach ($pedidos as $p) {
+          $cerveza = $em->getReference('AppBundle:Cerveza', $p->cervezaId);
+
+          $pedidoCerveza = new PedidoCerveza();
+          $pedidoCerveza->setCantidad($p->cantidad);
+          $pedidoCerveza->setCerveza($cerveza);
+          $pedidoCerveza->setPedido($pedido);
+          $pedido->addPedidoCervezas($pedidoCerveza);
+        }
+
+        $em->persist($pedido);
+        $em->flush();
+
         return $this->render('delivery/finalizarPedido.html.twig', [
             //'cervezas' => $cervezas
         ]);

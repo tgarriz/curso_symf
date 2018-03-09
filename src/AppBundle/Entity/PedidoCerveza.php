@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * PedidoCerveza
  *
@@ -35,7 +36,7 @@ class PedidoCerveza
     private $pedido;
 
     /**
-	 * @ORM\ManyToOne(targetEntity="Pedido")
+	 * @ORM\ManyToOne(targetEntity="Cerveza")
 	 * @ORM\JoinColumn(name="cerveza_id", referencedColumnName="id")
      */
     private $cerveza;
@@ -123,4 +124,3 @@ class PedidoCerveza
         return $this->cerveza;
     }
 }
-
